@@ -29,7 +29,7 @@
     <h2>慕课网:从基础到实战手把手带你掌握新版Webpack4.0 学习笔记</h2>
     <table>
         <tr>
-            <td class="bold">2-2 </td>
+            <td style="font-weight: bold;width: 50px;">2-2 </td>
             <td></td>
             <td></td>
             <td></td>
