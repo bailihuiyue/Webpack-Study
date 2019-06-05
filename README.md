@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <link rel="stylesheet" href="github-markdown.css"> 
-</head>
-<body>
+<article>
     <h2>慕课网:从基础到实战手把手带你掌握新版Webpack4.0 学习笔记</h2>
     <table>
         <tr>
@@ -63,5 +56,4 @@
             <td></td>
         </tr>
     </table>
-</body>
-</html>
+</article>
