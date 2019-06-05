@@ -1,5 +1,4 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.bootcss.com/github-markdown-css/3.0.1/github-markdown.min.css">
+
 <article>
     <h2>慕课网:从基础到实战手把手带你掌握新版Webpack4.0 学习笔记</h2>
     <table>
@@ -59,25 +58,3 @@
         </tr>
     </table>
 </article>
-
-<style>
-    .bold {
-        font-weight: bold;
-        width: 50px;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td {
-        border: 1px solid #DFE2E5;
-        border-collapse: collapse;
-        padding: 5px;
-    }
-
-    tr:nth-child(odd) {
-        background-color: #F8F8F8;
-    }
-</style>
