@@ -2,7 +2,7 @@
     <h2>慕课网:从基础到实战手把手带你掌握新版Webpack4.0 学习笔记</h2>
     <table>
         <tr>
-            <td>2-2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><strong>2-2</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td></td>
             <td></td>
             <td></td>
@@ -14,7 +14,7 @@
             <td></td>
         </tr>
         <tr>
-            <td>2-3</td>
+            <td><strong>2-3</strong></td>
             <td></td>
             <td></td>
             <td></td>
@@ -44,7 +44,7 @@
             <td></td>
         </tr>
         <tr>
-            <td>2-4</td>
+            <td><strong>2-4</strong></td>
             <td></td>
             <td></td>
             <td></td>
