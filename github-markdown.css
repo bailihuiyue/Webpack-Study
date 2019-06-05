@@ -1,0 +1,16 @@
+.bold {
+    font-weight: bold;
+    width: 50px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td {
+    border: 1px solid #DFE2E5;
+    border-collapse: collapse;
+    padding: 5px;
+}
+tr:nth-child(odd) {
+    background-color: #F8F8F8;
+}

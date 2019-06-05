@@ -3,27 +3,7 @@
 <head>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <style>
-        .bold {
-            font-weight: bold;
-            width: 50px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td {
-            border: 1px solid #DFE2E5;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #F8F8F8;
-        }
-    </style>
+    <link rel="stylesheet" href="github-markdown.css"> 
 </head>
 <body>
     <h2>慕课网:从基础到实战手把手带你掌握新版Webpack4.0 学习笔记</h2>
