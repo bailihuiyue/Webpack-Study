@@ -2,7 +2,9 @@
   "name": "Webpack-Study",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "bundle": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bailihuiyue/Webpack-Study.git"
