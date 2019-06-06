@@ -121,6 +121,42 @@
             <td></td>
             <td></td>
         </tr>
+        <tr>
+            <td>10</td>
+            <td>entry: "./src/index.js"</td>
+            <td>这是个简写,复杂写法为
+                entry: {
+                main: './src/index.js'
+                },
+            </td>
+            <td></td>
+            <td>2-5</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>const a=require('img.jpg')</td>
+            <td>console.log这个a,输出的就是文件名(webpack file-loader)</td>
+            <td>
+                file-loader原理:webpack打包时不知道如何打包图片,就去modules里面找,
+                找到test的正则,按照文件扩展名匹配,匹配到jpg使用file-loader处理,就开始打包,
+                首先把他图片拷贝到要输出的文件夹,并且改名,然后把图片的名字返回给require的变量
+            </td>
+            <td>3-1</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>loader是什么</td>
+            <td>就是对于特定文件打包处理的方案</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>webpack默认只能处理.js结尾的文件</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
 </body>
 
