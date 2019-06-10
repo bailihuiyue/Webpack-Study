@@ -7,9 +7,15 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.png$/,
+            test: /\.(png|jpg|gif)$/,
             use: {
-                loader: 'file-loader',
+                loader: 'url-loader',//url-loader也可以打包图片,但是会把图片变成base64写在页面中,优点,减少http请求,缺点,打包后的js文件特别大,会加载很久
+                options: {
+                    //webpack官网file-loader下查找placeHolder 视频3-2
+                    name: '[name]_[hash].[ext]',//可以使输出的文件名不变
+                    outputPath: 'images/', //输出路径(以dist为根目录)
+                    limit: 2048 //限制url-loader打包的文件大小,单位字节,小于limit的话直接写在js文件中,大于输出到文件夹中(仅url-loader有此设置)
+                }
             }
         }]
     },
