@@ -5,7 +5,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        main: './src/index.js'
+        main: './src/index.js',
+        // lesson:3-6 打包多个文件,key随便起
+		sub: './src/index.js'
     },
     module: {
         rules: [{
@@ -72,7 +74,12 @@ module.exports = {
         new CleanWebpackPlugin(['dist'])
     ],
     output: {
-        filename: "bundle.js",//输出文件名
+        // lesson:3-6 
+        // 打包后引入的js文件前面自动添加publicPath
+        publicPath:'http://cdn.com.cn',
+        // 根据entry中的名字(key)起名
+		filename: '[name].js',
+        //filename: "bundle.js",//输出文件名
         path: path.resolve(__dirname, 'dist')//输出文件地址(需要__dirname转换成绝对路径)
     }
 }
