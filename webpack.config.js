@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    // lesson:3-6
+    // lesson:3-7
     // source-map就表示编译前后编译后的一种映射关系,编译后的代码行数,报错位置和编译前不一样
     // 不方便查错,所以使用source-map建立一种映射关系,build后的代码可以查看到编译前的错误位置
     // source-map会在输出的dist目录输出一个和js文件同名的.map文件,用于建立映射关系
