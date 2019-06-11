@@ -20,12 +20,6 @@ module.exports = {
             }
         },
         {
-            test: /\.(eot|ttf|svg)$/,
-            use: {
-                loader: 'file-loader'
-            }
-        },
-        {
             test: /\.css$/,
             // lesson:3-3
             // css-loader 分析css文件之间的关系,最终合并成一段css
@@ -33,7 +27,35 @@ module.exports = {
             // 数组loader的执行顺序:从右到左
             // sass-loader先将sass编译成普通的css,然后再使用css-loader和style-loader
             // postcss-loader在css3特性前加前缀(使用插件autoprefixer),例如-webkit-transform,详细配置见https://webpack.docschina.org/loaders/postcss-loader/
-            use: ['style-loader', 'css-loader','sass-loader','postcss-loader'] 
+            use: [
+                'style-loader',
+                // lesson:3-4
+                //数组类型的rules要想添加其他内容,可以写成object
+                {
+                    loader: 'css-loader',
+                    options: {
+                        //从页面import的sass文件会走这4个loader,
+                        // 但是在sass中在@import的sass就不走之后的loader了
+                        // importLoaders:2表示@import的sass还要走下面的loader
+                        importLoaders: 2,
+                        //模块化打包 
+                        //false时 import './style.css'
+                        //true时 import styles from './style.css'
+                        // 就可以拿到styles使用了
+                        modules: true
+                    }
+                },
+                'sass-loader',
+                'postcss-loader'
+            ]
+        },
+        {
+            // lesson:3-4
+            // 打包字体文件
+            test: /\.(eot|ttf|svg)$/,
+            use: {
+                loader: 'file-loader'
+            }
         }]
     },
     output: {
