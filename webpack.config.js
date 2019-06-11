@@ -16,9 +16,10 @@ module.exports = {
     // eval是使用eval()的方式映射的,速度最快,但是复杂代码不一定映射的全面
     // cheap-module-eval-source-map 这是development下devtool的最佳实践
     // cheap-module-source-map 是production下devtool的最佳实践
-    // source-ma原理: 浏览器，Chrome和FF均提供Source Maps支持（IE11依然不支持），
+    // source-map原理: 浏览器，Chrome和FF均提供Source Maps支持（IE11依然不支持），
     // 浏览器实质上提供的是.map文件解析引擎，根据.map文件内容加载源文件和在调试模式中关联源码和编译后代码。
     // 使用了VLQ编码,最早用于MIDI文件，后来被多种格式采用。它的特点就是可以非常精简地表示很大的数值。
+    // 参考文章:
     // https://www.cnblogs.com/axl234/p/6500534.html
     // http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html
     // https://www.cnblogs.com/fsjohnhuang/p/4208566.html
