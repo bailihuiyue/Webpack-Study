@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -58,6 +60,17 @@ module.exports = {
             }
         }]
     },
+    // lesson:3-5
+    // HtmlWebpackPlugin 在打包结束后自动生成一个html文件,并自动引入生成的js文件到html
+    // template表示拷贝这个模板文件
+    // plugins有点类似于生命周期函数(或者说plugins里面有声明周期),HtmlWebpackPlugin的生命周期是打包结束的时候
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
+        }),
+        //CleanWebpackPlugin 打包之前先清空dist目录
+        new CleanWebpackPlugin(['dist'])
+    ],
     output: {
         filename: "bundle.js",//输出文件名
         path: path.resolve(__dirname, 'dist')//输出文件地址(需要__dirname转换成绝对路径)

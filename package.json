@@ -18,7 +18,9 @@
   "homepage": "https://github.com/bailihuiyue/Webpack-Study#readme",
   "devDependencies": {
     "autoprefixer": "^9.6.0",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
     "url-loader": "^2.0.0",
