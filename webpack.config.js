@@ -4,6 +4,25 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
+    // lesson:3-6
+    // source-map就表示编译前后编译后的一种映射关系,编译后的代码行数,报错位置和编译前不一样
+    // 不方便查错,所以使用source-map建立一种映射关系,build后的代码可以查看到编译前的错误位置
+    // source-map会在输出的dist目录输出一个和js文件同名的.map文件,用于建立映射关系
+    // inline-source-map则不会输出映射内容到单独文件,会写在编译后的文件的最后一行
+    // inline-cheap-source-map只提示出错行,如果不加cheap,则提示第几行第几列错了,这样详细的提示会导致编译很耗时
+    // 所以一般加cheap,只要知道哪行错了就好了
+    // 一般source-map不会映射第三方类库/模块的代码,只会映射自己写的代码
+    // cheap-module-source-map就会映射第三方类库了 
+    // eval是使用eval()的方式映射的,速度最快,但是复杂代码不一定映射的全面
+    // cheap-module-eval-source-map 这是development下devtool的最佳实践
+    // cheap-module-source-map 是production下devtool的最佳实践
+    // source-ma原理: 浏览器，Chrome和FF均提供Source Maps支持（IE11依然不支持），
+    // 浏览器实质上提供的是.map文件解析引擎，根据.map文件内容加载源文件和在调试模式中关联源码和编译后代码。
+    // 使用了VLQ编码,最早用于MIDI文件，后来被多种格式采用。它的特点就是可以非常精简地表示很大的数值。
+    // https://www.cnblogs.com/axl234/p/6500534.html
+    // http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html
+    // https://www.cnblogs.com/fsjohnhuang/p/4208566.html
+    devtool: 'source-map',
     entry: {
         main: './src/index.js',
         // lesson:3-6 打包多个文件,key随便起
