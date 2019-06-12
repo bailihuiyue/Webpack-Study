@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -27,8 +27,23 @@ module.exports = {
     entry: {
         main: './src/index.js',
         // lesson:3-6 打包多个文件,key随便起
-		sub: './src/index.js'
+		// sub: './src/index.js'
     },
+    // lesson:3-8
+    // devServer比--watch更强大,可以自动打包并启动浏览器,每次修改文件后自动刷新浏览器
+    // 需要安装webpack-dev-server
+    // package文件scripts添加"server": "node server.js"在server.js文件中可以实现自己的dev-server
+    // server.js文件要和webpack.config.js文件同级
+    devServer: {
+        contentBase: './dist',
+        // 自动起一个服务,并打开浏览器
+		open: true,
+        port: 8080,
+        //代理,url转发,vue-cli等脚手架工具可以支持代理是因为内部使用了webpack-dev-server
+        proxy:{
+            '/api':'http://localhost:3000'
+        }
+	},
     module: {
         rules: [{
             // lesson:3-2
@@ -86,17 +101,14 @@ module.exports = {
     // HtmlWebpackPlugin 在打包结束后自动生成一个html文件,并自动引入生成的js文件到html
     // template表示拷贝这个模板文件
     // plugins有点类似于生命周期函数(或者说plugins里面有声明周期),HtmlWebpackPlugin的生命周期是打包结束的时候
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'src/index.html'
-        }),
+    plugins: [new HtmlWebpackPlugin({
+        template: 'src/index.html'
         //CleanWebpackPlugin 打包之前先清空dist目录
-        new CleanWebpackPlugin(['dist'])
-    ],
+	}), new CleanWebpackPlugin()],
     output: {
         // lesson:3-6 
         // 打包后引入的js文件前面自动添加publicPath
-        publicPath:'http://cdn.com.cn',
+        // publicPath:'http://cdn.com.cn',
         // 根据entry中的名字(key)起名
 		filename: '[name].js',
         //filename: "bundle.js",//输出文件名

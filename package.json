@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +28,8 @@
     "style-loader": "^0.23.1",
     "url-loader": "^2.0.0",
     "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
     "file-loader": "^4.0.0"

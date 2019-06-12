@@ -1,3 +1,5 @@
-import img from './logo.png'
+// import img from './logo.png'
 
-console.log(img)
+// console.log(img)
+
+console.log('5')
