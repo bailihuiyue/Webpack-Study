@@ -221,6 +221,24 @@
             <td></td>
             <td>视频3-9 源码2-9</td>
         </tr>
+        <tr>
+            <td>20</td>
+            <td>3-10 Hot Module Replacement 热模块更新（2）</td>
+            <td><pre>
+                开启热更新后默认只能热更新css,如果想热更新js代码,
+                还要在头文件index.js
+                中加入以下代码,accept表示要监控的变化的文件,
+                后面接一个变化后的回调函数(css-loader已经实现,所以可以默认热更新css)
+                ,react,vue-loader也都已经实现
+                if(module.hot){
+                    module.hot.accept('./test',()=>{
+                        console.log("hot")
+                    })
+                }
+                </pre></td>
+            <td></td>
+            <td>视频3-10 源码2-9</td>
+        </tr>
     </table>
 </body>
 
