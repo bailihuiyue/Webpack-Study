@@ -30,8 +30,9 @@ module.exports = {
 		// sub: './src/index.js'
     },
     // lesson:3-8
-    // devServer比--watch更强大,可以自动打包并启动浏览器,每次修改文件后自动刷新浏览器
+    // devServer比--watch更强大,可以自动打包并启动浏览器,每次修改文件后自动刷新浏览器 --watch会先打包代码,然后运行
     // 需要安装webpack-dev-server
+    // webpack-dev-server直接运行,不打包代码
     // package文件scripts添加"server": "node server.js"在server.js文件中可以实现自己的dev-server
     // server.js文件要和webpack.config.js文件同级
     devServer: {
