@@ -3,6 +3,48 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
+/*.babelrc*/
+// {
+    //preset-env 是语法转换:es6转es5
+    //import "@babel/polyfill"; 可以转换方法,比如旧的浏览器不支持数组map方法(@babel/polyfill可能会污染全局变量)
+    // 给"@babel/preset-env"添加参数,把它变成一个数组,数组第一个是要使用的preset的名字
+    // 第二个参数是配置参数
+    // 写业务相关代码通常使用该方法
+    // presets: [
+    //     [
+    //         '@babel/preset-env',
+    //         {
+    //             // 不是把所有代码都转换成低版本浏览器支持的,
+    //             // 这样build完的文件会非常大
+    //             // usage表示只转换项目中使用到的
+    //             useBuiltIns: 'usage',
+    //             targets: {
+    //                 // lesson:3-12 
+    //                 // 项目运行时使用的浏览器环境
+    //                 // babel会根据设置的环境判断是否需要转换
+    //                 chrome: "67",
+    //             },
+    //         }
+    //     ]
+    // ]
+
+    // lesson:3-12 
+    // 写类库相关代码通常使用该方法,避免@babel/polyfill污染全局环境,闭包方式
+//     plugins: [
+//         [
+//           "@babel/plugin-transform-runtime",
+//           {
+//             "absoluteRuntime": false,
+//              //corejs为2时需要 npm install --save @babel/runtime-corejs2 ,通常都设置为2          
+//             "corejs": 2,
+//             "helpers": true,
+//             "regenerator": true,
+//             "useESModules": false
+//           }
+//         ]
+//       ]
+// }
+
 module.exports = {
     mode: 'development',
     // lesson:3-7
@@ -103,7 +145,17 @@ module.exports = {
             use: {
                 loader: 'file-loader'
             }
-        }]
+        },
+        // lesson:3-11
+        {
+            test: /\.js$/,
+            // 排除依赖文件
+            exclude: /node_modules/,
+            loader: "babel-loader",
+            // lesson:3-12
+            // options: 已提到.babelrc中,笔记在/*.babelrc*/位置
+        }
+        ]
     },
     // lesson:3-5
     // HtmlWebpackPlugin 在打包结束后自动生成一个html文件,并自动引入生成的js文件到html
