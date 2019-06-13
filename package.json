@@ -1,6 +1,7 @@
 {
   "name": "Webpack-Study",
   "version": "1.0.0",
+  "sideEffects": false,
   "description": "",
   "scripts": {
     "bundle": "webpack",

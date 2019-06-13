@@ -168,6 +168,16 @@ module.exports = {
     // lesson:3-9
     new webpack.HotModuleReplacementPlugin()
     ],
+    // lesson:4-1
+    // mode: 'development'默认不支持tree-shaking
+    // 需要用以下方式开启,并且在package.json中加入"sideEffects": ['@babel/polyfill','*.css'],
+    // 作用:不要忽略import "@babel/polyfill",css;这种什么也没导出的文件,或者设置为false,所有的模块都tree-shaking
+    // 注意:development就算开启了tree-shaking,也只是会在打包生成的代码中提示一下,使用了哪些方法
+    // 而不会真正的把没用的方法删除掉,因为代码删除之后,与编译前代码不一致,就没有办法做sourceMap了,行数会对不上,
+    // production不需要配置,自动开启,自动生效只需要在package.json中加入sideEffects
+    optimization: {
+		usedExports: true
+	},
     output: {
         // lesson:3-6 
         // 打包后引入的js文件前面自动添加publicPath
