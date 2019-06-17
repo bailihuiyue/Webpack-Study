@@ -286,6 +286,18 @@
             </td>
             <td>lesson:4-2 源码3-2</td>
         </tr>
+        <tr>
+            <td>26</td>
+            <td>4-3 Webpack 和 Code Splitting（1）</td>
+            <td>1.业务代码中引入过大库(lodash)会导致打包后的main.js过大,加载时间过长<br>
+                2.而lodash一般不会修改,但是业务代码会经常修改,打包一次,用户的缓存没了,又要重新加载,白白的重新加载了一次lodash<br>
+                解决方法,可以利用多入口,生成多个文件,html模板会依次引入多个文件,先引入库(将lodash添加到全局变量),然后后面的业务代码就可以运行了
+                <img src="./img/1.png">
+            </td>
+            <td>1.package.js文件下"dev-build"<br>
+            </td>
+            <td>lesson:4-2 源码3-2</td>
+        </tr>
     </table>
 </body>
 
