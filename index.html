@@ -266,13 +266,27 @@
             <td>24</td>
             <td>4-1 Tree Shaking 概念详解</td>
             <td>
-                Tree Shaking翻译成中文叫摇树,把一棵树上没用的东西都摇掉<br/>
+                Tree Shaking翻译成中文叫摇树,把一棵树上没用的东西都摇掉<br />
                 就是打包时只打进引入的方法或变量,没有引入的不打包,以减小打包后的体积<br>
                 比如一个js文件中有add,minus两个方法,只引入了add,那么打包也会只有add
             </td>
             <td>Tree Shaking 只支持 ES Module(import方式引入)</td>
             <td>lesson:4-1 源码3-1</td>
         </tr>
+        <tr>
+            <td>25</td>
+            <td>4-2 Develoment 和 Production 模式的区分打包</td>
+            <td>
+                Develoment:不压缩<br>
+                Production:压缩
+            </td>
+            <td>代码见1.package.js里面script下的"dev","bulid"<br>
+                2.build文件夹下webpack.dev.js,webpack.prod.js<br>
+                3.build文件夹下webpack.common.js
+            </td>
+            <td>lesson:4-2 源码3-2</td>
+        </tr>
     </table>
 </body>
+
 </html>
