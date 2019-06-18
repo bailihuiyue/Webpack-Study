@@ -77,24 +77,36 @@ module.exports = {
 		// splitChunks: {
 			// chunks可选值:all,async,inital(只针对同步) 
 			// async表示只对异步代码做分割
-			// all还需要对cacheGroups.vendors做配置才能生效
+			// 同步的情况下还需要对cacheGroups.vendors做配置才能生效
 		// 	chunks: 'all',
 			//表示对多大的库进行分割,大于minSize才分割
 		// 	minSize: 30000,
+			// lesson:4-5
+			// 对已经分割的库进行二次分割,这个配置项很少用
+		// 	maxSize: 50000, 
+			// minChunks表示当一个模块被调用多少次之后才会分割出来
 		// 	minChunks: 1,
+			// 同时加载的模块数(最多打包的模块数,也就是说前五个会生成分割,后面的就不会再生成了)
 		// 	maxAsyncRequests: 5,
+			// 入口文件做代码分割的数量(一般使用默认配置)
 		// 	maxInitialRequests: 3,
+			// 生成的文件名字的连接符
 		// 	automaticNameDelimiter: '~',
+			// 一般使用默认配置
 		// 	name: true,
+			// 打包同步代码的配置
 		// 	cacheGroups: {
 		// 	  vendors: {
 		// 		test: /[\\/]node_modules[\\/]/,
+				// 走cacheGroups里面哪个规则的优先级,表示一个权重,先走权重大的,后走小的,-10>-20
 		// 		priority: -10,
 				//表示所有的库都打包到vendors.js中,他们属于vendors组,所以前面有个vendors~表示分组
 		// 		filename: 'vendors.js',
 		// 	  },
 		// 	  default: {
 		// 		priority: -20,
+				// 复用之前被打包过的模块.比如页面加载了a和b,而a本身也加载了b,那么reuseExistingChunk
+				//为true时b就不会重复打包,a使用之前打包过的b
 		// 		reuseExistingChunk: true,
 		// 		filename: 'common.js'
 		// 	  }
