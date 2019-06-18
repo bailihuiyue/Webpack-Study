@@ -56,6 +56,7 @@ module.exports = {
 	],
 	// lesson:4-4
 	optimization: {
+		// 用来做代码分割,不写的话也有默认值的
 		splitChunks: {
 			// 要做代码分割,类库单独打包成一个文件
 			// 用于同步引入的代码分割(文件头一行写的import),
@@ -66,7 +67,39 @@ module.exports = {
 			// 1. 同步代码： 只需要在webpack.common.js中做optimization的配置即可
 			// 2. 异步代码(import): 异步代码，无需做任何配置，会自动进行代码分割，放置到新的文件中
 			chunks: 'all',
+			// lesson:4-5 不加cacheGroups,只写魔法注释,生成的文件会带vendors~
+			cacheGroups: {
+				vendors:false,
+				default: false
+			  }
 		}
+		// lesson:4-5 关于splitChunks默认值的解释
+		// splitChunks: {
+			// chunks可选值:all,async,inital(只针对同步) 
+			// async表示只对异步代码做分割
+			// all还需要对cacheGroups.vendors做配置才能生效
+		// 	chunks: 'all',
+			//表示对多大的库进行分割,大于minSize才分割
+		// 	minSize: 30000,
+		// 	minChunks: 1,
+		// 	maxAsyncRequests: 5,
+		// 	maxInitialRequests: 3,
+		// 	automaticNameDelimiter: '~',
+		// 	name: true,
+		// 	cacheGroups: {
+		// 	  vendors: {
+		// 		test: /[\\/]node_modules[\\/]/,
+		// 		priority: -10,
+				//表示所有的库都打包到vendors.js中,他们属于vendors组,所以前面有个vendors~表示分组
+		// 		filename: 'vendors.js',
+		// 	  },
+		// 	  default: {
+		// 		priority: -20,
+		// 		reuseExistingChunk: true,
+		// 		filename: 'common.js'
+		// 	  }
+		// 	}
+		//   }
 	},
 	output: {
 		filename: '[name].js',
