@@ -66,6 +66,7 @@ module.exports = {
 			// webpack中实现代码分割，两种方式
 			// 1. 同步代码： 只需要在webpack.common.js中做optimization的配置即可
 			// 2. 异步代码(import): 异步代码，无需做任何配置，会自动进行代码分割，放置到新的文件中
+			// lesson:4-7 code-spliting一般只配置chunks: 'all',就行了,剩下的让webpack自动执行就行了
 			chunks: 'all',
 			// lesson:4-5 不加cacheGroups,只写魔法注释,生成的文件会带vendors~
 			cacheGroups: {
@@ -84,7 +85,7 @@ module.exports = {
 			// lesson:4-5
 			// 对已经分割的库进行二次分割,这个配置项很少用
 		// 	maxSize: 50000, 
-			// minChunks表示当一个模块被调用多少次之后才会分割出来
+			// minChunks表示当一个模块被其他模块(Chunks)调用多少次之后才会分割出来
 		// 	minChunks: 1,
 			// 同时加载的模块数(最多打包的模块数,也就是说前五个会生成分割,后面的就不会再生成了)
 		// 	maxAsyncRequests: 5,
