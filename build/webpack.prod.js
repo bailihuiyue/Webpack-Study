@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const path = require('path');
 
 const prodConfig = {
     mode: 'production',
@@ -56,6 +57,12 @@ const prodConfig = {
                 ]
             }
         ]
+    },
+    // lesson 4-10 contenthash会根据内容变化而变化,就像md5
+    output: {
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, '../dist')
     }
 }
 

@@ -2,6 +2,7 @@ const webpack = require('webpack');
 //lesson:4-2 webpack-merge该插件需要安装
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
+const path = require('path');
 
 const devConfig = {
 	mode: 'development',
@@ -43,6 +44,12 @@ const devConfig = {
 				]
 			}
 		]
+	},
+	// lesson 4-10
+	output: {
+		filename: '[name].js',
+		chunkFilename: '[name].js',
+		path: path.resolve(__dirname, '../dist')
 	}
 }
 

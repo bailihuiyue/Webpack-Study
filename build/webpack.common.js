@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -118,12 +118,15 @@ module.exports = {
 		// 	}
 		//   }
 	},
-	output: {
-		filename: '[name].js',
-		// lesson 4-9 入口文件的打包走output的filename配置,
-		// 类库(chunk)打包走chunkFilename,直接被html模板引用的就走filename
-		// 否则走chunkFilename
-		chunkFilename: '[name].chunk.js',
-		path: path.resolve(__dirname, '../dist')
-	}
+	// lesson:4-10 webpack build时不输出警告
+	performance:false,
+	// lesson 4-10 分别移入webpack.dev.js和webpack.prod.js
+	// output: {
+	// 	filename: '[name].js',
+	// 	// lesson 4-9 入口文件的打包走output的filename配置,
+	// 	// 类库(chunk)打包走chunkFilename,直接被html模板引用的就走filename
+	// 	// 否则走chunkFilename
+	// 	chunkFilename: '[name].chunk.js',
+	// 	path: path.resolve(__dirname, '../dist')
+	// }
 }
