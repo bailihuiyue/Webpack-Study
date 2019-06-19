@@ -2,8 +2,10 @@
 // import "@babel/polyfill";
 // console.log(img)
 // import number from './test'
+// lesson:4-9
+import './style.css';
 
-// console.log('5')
+console.log('5')
 
 // const a = () => {
 //     new Promise((res, rej) => res(0)).then(res => ["2", "3"].map(() => "hehe"))
@@ -27,9 +29,9 @@
 // getComponent().then(element => {
 // 	document.body.appendChild(element);
 // });
-document.addEventListener('click', () =>{
-            // lesson:4-8 魔法注释,使用Prefetch
-	import(/* webpackPrefetch: true */ './click.js').then(({default: func}) => {
-		func();
-	})
-});
+// document.addEventListener('click', () =>{
+//             // lesson:4-8 魔法注释,使用Prefetch
+// 	import(/* webpackPrefetch: true */ './click.js').then(({default: func}) => {
+// 		func();
+// 	})
+// });

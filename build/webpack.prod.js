@@ -1,13 +1,15 @@
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const prodConfig = {
     mode: 'production',
     devtool: 'cheap-module-source-map',
-    //lesson:4-2    //production模式不需要
+    // lesson:4-2    //production模式不需要
     // new webpack.HotModuleReplacementPlugin()
 
-    //lesson:4-2 
+    // lesson:4-2 
     //production模式不需要
     // devServer: {
     //     disableHostCheck: true,
@@ -20,6 +22,41 @@ const prodConfig = {
     //     hot: true,
     //     hotOnly: true
     // },
+    // lesson:4-9 MiniCssExtractPlugin会合并所有css文件到一个文件中(不压缩)
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        })
+    ],
+    optimization: {
+        minimizer: [new OptimizeCSSAssetsPlugin({})],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2
+                        }
+                    },
+                    'sass-loader',
+                    // 'postcss-loader'
+                ]
+            }, {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    // 'postcss-loader'
+                ]
+            }
+        ]
+    }
 }
 
 module.exports = merge(commonConfig, prodConfig);
