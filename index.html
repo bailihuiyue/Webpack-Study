@@ -330,6 +330,21 @@
             </td>
             <td>lesson:4-7</td>
         </tr>
+        <tr>
+            <td>31</td>
+            <td>4-8 打包分析，Preloading, Prefetching</td>
+            <td>
+                1.打包分析:对打包后生成的代码进行分析:https://github.com/webpack/analyse,https://webpack.js.org/guides/code-splitting/#bundle-analysis,生成stats.json用于分析,一般使用webpack-bundle-analyzer居多<br>
+                2.chrome浏览器ctrl+shift+p可以调出显示面板,想写出高性能页面,就要提高代码利用率,chrome:调出显示面板输入:show coverage然后进行录制<br>
+                3.Preload,Prefetch场景:首页显示页面,右上角有个登录按钮,如果登录界面是异步加载,那么点击登录时才加载会影响用户体验,如果在首页加载完毕后再偷偷加载好登录弹窗,就不影响体验了,这就是Preloading<br>
+                4.Preload,Prefetch区别:类似同步和异步,Prefetch等页面主要内容(核心业务代码)加载完成后才去加载(同步),Preload和主页面一同去加载(异步)
+                前端性能优化,缓存对于页面性能的提升很有限,要专注于code coverage上,才能真正提升用户体验<br>
+                备注:代码率用率:页面上有click按钮,点击时才执行某一事件,那么这段代码就会降低页面利用率,因为页面加载时不需要这段代码,这段可以异步加载,点击时再引入这段逻辑,可以有效降低当前页面打包后的js文件大小,提升加载速度,减少用户加载页面的等待时间
+            </td>
+            <td><br>
+            </td>
+            <td>lesson:4-8 源码3-6</td>
+        </tr>
     </table>
 </body>
 

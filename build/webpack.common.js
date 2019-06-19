@@ -76,7 +76,7 @@ module.exports = {
 		}
 		// lesson:4-5 关于splitChunks默认值的解释
 		// splitChunks: {
-			// chunks可选值:all,async,inital(只针对同步) 
+			// chunks可选值:all,async,inital(只针对同步) ,默认值为async因为webpack认为只有异步加载的代码才能提高网站性能(代码利用率)
 			// async表示只对异步代码做分割
 			// 同步的情况下还需要对cacheGroups.vendors做配置才能生效
 		// 	chunks: 'all',
