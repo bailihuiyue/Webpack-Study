@@ -77,5 +77,3 @@ typings/
 
 dist/
 yarn.lock
-dist/bundle.js
-dist/bundle.js

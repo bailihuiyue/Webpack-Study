@@ -59,6 +59,13 @@ module.exports = {
 	],
 	// lesson:4-4
 	optimization: {
+		// lesson:4-10 老版本webpack4每次打包都会变化hash,设置这个选项让他根据文件内容而变
+		// webpack打包时也会生成包与包之间关系的一段代码(或者是文件)叫做manifest,每次打包时manifest会变化,而这个manifest
+		// 在老版本webpack中会写在js文件(mian等等各个文件)中,导致文件每次都不一样,生成了不同hash
+		// 配置了runtimeChunk之后就把manifest抽离到单独的文件中,这样业务文件或者类库文件就不受manifest的变化而导致hash不同了
+		runtimeChunk: {
+			name: 'runtime'
+		},
 		usedExports: true,
 		// 用来做代码分割,不写的话也有默认值的
 		splitChunks: {
@@ -119,7 +126,7 @@ module.exports = {
 		//   }
 	},
 	// lesson:4-10 webpack build时不输出警告
-	performance:false,
+	performance: false,
 	// lesson 4-10 分别移入webpack.dev.js和webpack.prod.js
 	// output: {
 	// 	filename: '[name].js',
