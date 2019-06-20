@@ -1,6 +1,7 @@
 // const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 	entry: {
@@ -10,7 +11,13 @@ module.exports = {
 		rules: [{
 			test: /\.js$/,
 			exclude: /node_modules/,
-			loader: 'babel-loader',
+			// 单一loader直接写loader就行了,多个就要使用use数组了
+			use: [
+				{ loader: 'babel-loader' },
+				//lesson:4-11将this指向从模块本身指向window
+				{ loader: 'imports-loader?this=>window' }
+			],
+			// loader: 'babel-loader',
 		}, {
 			test: /\.(jpg|png|gif)$/,
 			use: {
@@ -55,7 +62,15 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'src/index.html'
 		}),
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		// lesson:4-11 webpack发现代码中使用了$,就自动帮你引入jquery,相当于全局引用
+		// 用于解决老版本js插件不支持import的问题
+		// ProvidePlugin就是一个shimming(垫片)
+		// $css表示将jquery.css转换成$css
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			$css: ['jquery', 'css']
+		})
 	],
 	// lesson:4-4
 	optimization: {

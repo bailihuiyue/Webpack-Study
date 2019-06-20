@@ -7,6 +7,7 @@ import './style.css';
 
 console.log('5')
 
+$('body').css('backgroundColor', "#0094ff");
 // const a = () => {
 //     new Promise((res, rej) => res(0)).then(res => ["2", "3"].map(() => "hehe"))
 // }
