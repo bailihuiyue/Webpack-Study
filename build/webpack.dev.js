@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 //lesson:4-2 webpack-merge该插件需要安装
-const merge = require('webpack-merge');
-const commonConfig = require('./webpack.common.js');
+// const merge = require('webpack-merge');
+// const commonConfig = require('./webpack.common.js');
 const path = require('path');
 
 const devConfig = {
@@ -54,4 +54,7 @@ const devConfig = {
 }
 
 //lesson:4-2合并配置文件 
-module.exports = merge(commonConfig, devConfig);
+// module.exports = merge(commonConfig, devConfig);
+
+// lesson:4-12
+module.exports = devConfig;

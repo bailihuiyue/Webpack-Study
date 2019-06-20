@@ -3,7 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = {
+// lesson:4-12
+// 使用全局变量env来控制是development还是prodction,这样就统一webpack入口都是webpack.common.js了
+// 全局变量通过package.json中scripts里面的"dev","build"等等参数传入,
+// 例如:"build": "webpack --env.production --config ./build/webpack.common.js"
+// --env.production的其他写法1.--env production 那么接受的参数直接就是production,2.--env.production=123接收就是env.production为123
+const merge = require('webpack-merge');
+const devConfig = require('./webpack.dev.js');
+const prodConfig = require('./webpack.prod.js');
+
+//module.exports =
+// lesson:4-12
+const commonConfig = {
 	entry: {
 		main: './src/index.js'
 	},
@@ -14,8 +25,9 @@ module.exports = {
 			// 单一loader直接写loader就行了,多个就要使用use数组了
 			use: [
 				{ loader: 'babel-loader' },
-				//lesson:4-11将this指向从模块本身指向window
-				{ loader: 'imports-loader?this=>window' }
+				// lesson:4-11将this指向从模块本身指向window
+				// 使用后报错 Module parse failed: 'import' and 'export' may only appear at the top level (9:0) 原因未知
+				// { loader: 'imports-loader?this=>window' }
 			],
 			// loader: 'babel-loader',
 		}, {
@@ -151,4 +163,12 @@ module.exports = {
 	// 	chunkFilename: '[name].chunk.js',
 	// 	path: path.resolve(__dirname, '../dist')
 	// }
+}
+
+module.exports = (env) => {
+	if (env && env.production) {
+		return merge(commonConfig, prodConfig);
+	} else {
+		return merge(commonConfig, devConfig);
+	}
 }
