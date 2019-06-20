@@ -58,11 +58,11 @@ const prodConfig = {
             }
         ]
     },
-    // lesson 4-10 contenthash会根据内容变化而变化,就像md5
+    // lesson:4-10 contenthash会根据内容变化而变化,就像md5
     output: {
         filename: '[name].[contenthash].js',
         chunkFilename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist'),
     }
 }
 
