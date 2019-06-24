@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+// lseeon:5-2
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
@@ -38,6 +39,9 @@ const prodConfig = {
 			filename: '[name].css',
 			chunkFilename: '[name].chunk.css'
 		}),
+		// lseeon:5-2 利用serviceWorker生成pwa应用(离线app),即使断网(刷新页面)也可使用
+		// 会在dist目录生成precache和service-worker来完成该功能,
+		// 还需要在业务js中写入js代码,见src/index.js lesson:5-2
 		new WorkboxPlugin.GenerateSW({
 			clientsClaim: true,
 			skipWaiting: true
