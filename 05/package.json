@@ -2,10 +2,15 @@
   "name": "05",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/library.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
 }
