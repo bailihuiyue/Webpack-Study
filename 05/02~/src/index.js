@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDom from 'react-dom';
 import axios from 'axios';
+import Home from './home.js';
+import List from './list.js';
 
 console.log('hello, this is dell');
 
@@ -26,7 +29,16 @@ class App extends Component {
 	}
 
 	render() {
-		return <div>Hello World</div>
+		// return <div>Hello World</div>
+		// lesson:5-5
+		return (
+			<BrowserRouter>
+				<div>
+					<Route path='/' exact component={Home} />
+					<Route path='/list' component={List} />
+				</div>
+			</BrowserRouter>
+		)
 	}
 }
 

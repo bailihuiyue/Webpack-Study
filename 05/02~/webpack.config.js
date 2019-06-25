@@ -16,6 +16,11 @@ module.exports = {
 		port: 8080,
 		hot: true,
 		hotOnly: true,
+		// lesson:5-5让webpack支持pushState方式跳转路由
+		// 原理:浏览器请求www.abc.com/a/b时,后端认为请求的是/a/b页面,当前端请求一个后端不存在的页面(地址)时,后端始终跳转请求到首页,
+		// 前端框架收到/a/b的请求时,会自行处理,
+		// historyApiFallback还有更多配置方法,比如rewrites,指定某种url返回某个html文件,默认都是只写个true
+		historyApiFallback: true,
 		proxy: {
 			// devServer默认无法对/(根目录)进行转发,需要设置index:''
 			// index:'',
@@ -37,7 +42,7 @@ module.exports = {
 				// 设置请求头
 				headers: {
 					host: 'www.dell-lee.com',
-					cookie:""
+					cookie: ""
 				}
 			}
 		}
