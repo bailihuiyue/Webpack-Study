@@ -11,6 +11,8 @@ module.exports = {
 	},
 	// lesson:5-4
 	devServer: {
+		// 出错时在浏览器弹出一个层
+		overlay: true,
 		contentBase: './dist',
 		open: true,
 		port: 8080,
@@ -52,6 +54,18 @@ module.exports = {
 			test: /\.js$/,
 			exclude: /node_modules/,
 			loader: 'babel-loader',
+			// use: ['babel-loader', 'eslint-loader']
+			// use: [{
+			// 	// lesson:5-7 把eslint和webpack结合起来,让devserver每次启动时执行一下eslint
+			//  eslint使用后会降低打包速度,一般提交代码时git的钩子会验证代码,不符合规范会禁止提交代码
+			// 	loader: 'eslint-loader',
+			// 	options: {
+			// 		// 让eslint自动修复问题
+			// 		fix: true
+			// 	},
+			// 	// 数组loader的执行顺序是从右到左,使用force:"pre",强制eslint-loader先执行
+			// 	force: "pre"
+			// }, 'babel-loader']
 		}, {
 			test: /\.(jpg|png|gif)$/,
 			use: {

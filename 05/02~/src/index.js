@@ -34,7 +34,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<Route path='/' exact component={Home} />
+					<Route path="/" exact component={Home} />
 					<Route path='/list' component={List} />
 				</div>
 			</BrowserRouter>
