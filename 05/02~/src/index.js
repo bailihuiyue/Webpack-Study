@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDom from 'react-dom';
 import axios from 'axios';
-import Home from './home.js';
-import List from './list.js';
+import Home from './home';
+import List from './list';
 
 console.log('hello, this is dell');
 

@@ -7,9 +7,22 @@ module.exports = {
 		main: './src/index.js',
 		tsx: './src/index.tsx',
 	},
+	resolve: {
+		// lesson:5-9 很多时候import Home from './home'并不需要写扩展名,这就是靠extensions实现的,
+		// webpack会自动按照extensions去拼接文件然后查找是否存在,比如home会依次查找home.js,home.jsx
+		// 配多了会卡,因为总得找
+		extensions: ['.js', '.jsx'],
+		//有时候只需要引文件到文件夹级别,就可以自动找到里面的index.js或者其他,就是利用mainFiles实现的
+		mainFiles:['index','child'],
+		// 别名 import Home from 'hehe',如果直接引入hehe,那么会查找../src/a/b/c/child下面的文件
+		alias: {
+			hehe: path.resolve(__dirname, '../src/a/b/c/child')
+		}
+	},
 	module: {
 		rules: [{
-			test: /\.js$/,
+			// lesson:5-9 ?表示前面的字符可有可无
+			test: /\.jsx?$/,
 			// exclude: /node_modules/,
 			// lesson:5-8也可以写成include
 			// include,exclude一般只适用于js,像图片之类的就不需要了,因为所有的图片都需要打包到dist下
