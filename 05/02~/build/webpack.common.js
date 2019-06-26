@@ -7,37 +7,57 @@ const webpack = require('webpack');
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
 
 // lesson:5-11
-const plugins = [
-	new HtmlWebpackPlugin({
-		template: 'src/index.html'
-	}),
-	new CleanWebpackPlugin(['dist'], {
-		root: path.resolve(__dirname, '../')
+// const plugins = [
+// 	new HtmlWebpackPlugin({
+// 		template: 'src/index.html'
+// 	}),
+// 	new CleanWebpackPlugin(['dist'], {
+// 		root: path.resolve(__dirname, '../')
+// 	})
+// ];
+
+const makePlugins = (configs) => {
+	const plugins = [
+		new CleanWebpackPlugin(['dist'], {
+			root: path.resolve(__dirname, '../')
+		})
+	];
+	// lesson:5-13多页面配置,根据entry循环出不同模板,加载不同chunk,
+	// 因为当前webpack的config文件设置的chunk name和entry一样
+	Object.keys(configs.entry).forEach(item => {
+		plugins.push(
+			new HtmlWebpackPlugin({
+				template: 'src/index.html',
+				filename: `${item}.html`,
+				chunks: ['runtime', 'vendors', item]
+			})
+		)
+	});
+	// 库太多,写成自循环的方法让程序自动添加到模板
+	const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+	files.forEach(file => {
+		if (/.*\.dll.js/.test(file)) {
+			plugins.push(new AddAssetHtmlWebpackPlugin({
+				filepath: path.resolve(__dirname, '../dll', file)
+			}))
+		}
+		// 在webpack.dll.config.js中打包后比如会生成 vendor.dll.js文件和vendor-manifest.json文件,
+		// vendor.dll.js文件包含所有的第三方库文件,
+		// vendor-manifest.json文件会包含所有库代码的一个索引,
+		// 当在使用webpack.config.js文件打包DllReferencePlugin插件的时候,
+		// 会使用该DllReferencePlugin插件读取vendor-manifest.json文件,
+		// 看看是否有该第三方库 vendor-manifest.json文件就是有一个第三方库的一个映射而已。
+		if (/.*\.manifest.json/.test(file)) {
+			plugins.push(new webpack.DllReferencePlugin({
+				manifest: path.resolve(__dirname, '../dll', file)
+			}))
+		}
 	})
-];
+	return plugins;
+}
 
-// 库太多,写成自循环的方法让程序自动添加到模板
-const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
-files.forEach(file => {
-	if (/.*\.dll.js/.test(file)) {
-		plugins.push(new AddAssetHtmlWebpackPlugin({
-			filepath: path.resolve(__dirname, '../dll', file)
-		}))
-	}
-	// 在webpack.dll.config.js中打包后比如会生成 vendor.dll.js文件和vendor-manifest.json文件,
-	// vendor.dll.js文件包含所有的第三方库文件,
-	// vendor-manifest.json文件会包含所有库代码的一个索引,
-	// 当在使用webpack.config.js文件打包DllReferencePlugin插件的时候,
-	// 会使用该DllReferencePlugin插件读取vendor-manifest.json文件,
-	// 看看是否有该第三方库 vendor-manifest.json文件就是有一个第三方库的一个映射而已。
-	if (/.*\.manifest.json/.test(file)) {
-		plugins.push(new webpack.DllReferencePlugin({
-			manifest: path.resolve(__dirname, '../dll', file)
-		}))
-	}
-})
-
-module.exports = {
+// module.exports 
+const configs = {
 	entry: {
 		main: './src/index.js',
 		tsx: './src/index.tsx',
@@ -90,7 +110,7 @@ module.exports = {
 			exclude: /node_modules/
 		}]
 	},
-	plugins,
+	// plugins,
 	// plugins: [
 	// 	new HtmlWebpackPlugin({
 	// 		template: 'src/index.html'
@@ -104,3 +124,7 @@ module.exports = {
 		path: path.resolve(__dirname, '../dist')
 	}
 }
+
+configs.plugins = makePlugins(configs);
+
+module.exports = configs
