@@ -1,6 +1,41 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+// lesson:5-10 将文件(库)添加到html模板中,原理:build后在html中写入<script>标签
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+
+// lesson:5-11
+const plugins = [
+	new HtmlWebpackPlugin({
+		template: 'src/index.html'
+	}),
+	new CleanWebpackPlugin(['dist'], {
+		root: path.resolve(__dirname, '../')
+	})
+];
+
+// 库太多,写成自循环的方法让程序自动添加到模板
+const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
+files.forEach(file => {
+	if (/.*\.dll.js/.test(file)) {
+		plugins.push(new AddAssetHtmlWebpackPlugin({
+			filepath: path.resolve(__dirname, '../dll', file)
+		}))
+	}
+	// 在webpack.dll.config.js中打包后比如会生成 vendor.dll.js文件和vendor-manifest.json文件,
+	// vendor.dll.js文件包含所有的第三方库文件,
+	// vendor-manifest.json文件会包含所有库代码的一个索引,
+	// 当在使用webpack.config.js文件打包DllReferencePlugin插件的时候,
+	// 会使用该DllReferencePlugin插件读取vendor-manifest.json文件,
+	// 看看是否有该第三方库 vendor-manifest.json文件就是有一个第三方库的一个映射而已。
+	if (/.*\.manifest.json/.test(file)) {
+		plugins.push(new webpack.DllReferencePlugin({
+			manifest: path.resolve(__dirname, '../dll', file)
+		}))
+	}
+})
 
 module.exports = {
 	entry: {
@@ -13,7 +48,7 @@ module.exports = {
 		// 配多了会卡,因为总得找
 		extensions: ['.js', '.jsx'],
 		//有时候只需要引文件到文件夹级别,就可以自动找到里面的index.js或者其他,就是利用mainFiles实现的
-		mainFiles:['index','child'],
+		mainFiles: ['index', 'child'],
 		// 别名 import Home from 'hehe',如果直接引入hehe,那么会查找../src/a/b/c/child下面的文件
 		alias: {
 			hehe: path.resolve(__dirname, '../src/a/b/c/child')
@@ -36,13 +71,13 @@ module.exports = {
 			// tsconfig.json文件配置解释
 			// {
 			// 	"compilerOpitons": {
-						//输出目录 如果在webpack.common中配置过output,可不写
+			//输出目录 如果在webpack.common中配置过output,可不写
 			// 		"outDir": "./dist",
-						// ts 使用的模块引入方式为es6(import)方式
+			// ts 使用的模块引入方式为es6(import)方式
 			// 		"module": "es6",
-						// 语法最终转换为es5
+			// 语法最终转换为es5
 			// 		"target": "es5",
-						// 允许ts中引入js模块
+			// 允许ts中引入js模块
 			// 		"allowJs": true,
 			// 	}
 			// }
@@ -55,14 +90,15 @@ module.exports = {
 			exclude: /node_modules/
 		}]
 	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			template: 'src/index.html'
-		}),
-		new CleanWebpackPlugin(['dist'], {
-			root: path.resolve(__dirname, '../')
-		})
-	],
+	plugins,
+	// plugins: [
+	// 	new HtmlWebpackPlugin({
+	// 		template: 'src/index.html'
+	// 	}),
+	// 	new CleanWebpackPlugin(['dist'], {
+	// 		root: path.resolve(__dirname, '../')
+	// 	})
+	// ],
 	performance: false,
 	output: {
 		path: path.resolve(__dirname, '../dist')
