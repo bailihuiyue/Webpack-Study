@@ -10,7 +10,10 @@ module.exports = {
 	module: {
 		rules: [{
 			test: /\.js$/,
-			exclude: /node_modules/,
+			// exclude: /node_modules/,
+			// lesson:5-8也可以写成include
+			// include,exclude一般只适用于js,像图片之类的就不需要了,因为所有的图片都需要打包到dist下
+			include: path.resolve(__dirname, '../src'),
 			use: [{
 				loader: 'babel-loader'
 			}]
