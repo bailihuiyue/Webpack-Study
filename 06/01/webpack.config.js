@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyRightWebpackPlugin = require('./plugins/copyright-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -28,6 +29,13 @@ module.exports = {
 			]
 		}]
 	},
+	plugins: [
+		// lesson:6-3 插件的本质就是一个类,所以要new一下才能用
+		new CopyRightWebpackPlugin({
+			// 可以定义参数,在plugin的constructor中接收
+			name:"dell lee"
+		})
+	],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js'
