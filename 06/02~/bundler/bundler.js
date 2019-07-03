@@ -39,3 +39,33 @@ const moduleAnalyser = (filename) => {
 
 const moduleInfo = moduleAnalyser('./src/index.js');
 console.log(moduleInfo);
+
+// lesson:6-6
+// 递归分析模块,生成依赖图谱
+const makeDependenciesGraph = (entry) => {
+	const entryModule = moduleAnalyser(entry);
+	// graphArray是个一维数组
+	const graphArray = [ entryModule ];
+	for(let i = 0; i < graphArray.length; i++) {
+		const item = graphArray[i];
+		const { dependencies } = item;
+		if(dependencies) {
+			for(let j in dependencies) {
+				graphArray.push(
+					moduleAnalyser(dependencies[j])
+				);
+			}
+		}
+	}
+	const graph = {};
+	graphArray.forEach(item => {
+		graph[item.filename] = {
+			dependencies: item.dependencies,
+			code: item.code
+		}
+	});
+	return graph;
+}
+
+const graghInfo = makeDependenciesGraph('./src/index.js');
+console.log(graghInfo);
