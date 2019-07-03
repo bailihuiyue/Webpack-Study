@@ -69,3 +69,31 @@ const makeDependenciesGraph = (entry) => {
 
 const graghInfo = makeDependenciesGraph('./src/index.js');
 console.log(graghInfo);
+
+// lesson:6-7 创建最终要生成的代码,太复杂,没看
+const generateCode = (entry) => {
+	const graph = JSON.stringify(makeDependenciesGraph(entry));
+	// 放在闭包里,避免污染全局环境
+	// 递归执行,require,把require方法里需要的文件reqiure('./a.js')
+	//这里的参数当做key,获取他的内容,然后继续执行
+	return `
+		(function(graph){
+			// 翻译完成的代码中有require,exports关键字,浏览器中不存在这些方法,会报错,
+			//因此需要自己实现这两个关键字
+			function require(module) { 
+				function localRequire(relativePath) {
+					return require(graph[module].dependencies[relativePath]);
+				}
+				var exports = {};
+				(function(require, exports, code){
+					eval(code)
+				})(localRequire, exports, graph[module].code);
+				return exports;
+			};
+			require('${entry}')
+		})(${graph});
+	`;
+}
+
+const code = generateCode('./src/index.js');
+console.log(code);
