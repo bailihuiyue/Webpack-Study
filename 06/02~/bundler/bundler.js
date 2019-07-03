@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const parser = require('@babel/parser');
+// 内部使用了export default,因此需要要加个.default才能使用
 const traverse = require('@babel/traverse').default;
 const babel = require('@babel/core');
 
@@ -17,12 +18,15 @@ const moduleAnalyser = (filename) => {
 	const dependencies = {};
 	// 使用@babel/traverse操作语法树
 	traverse(ast, {
+		// 抽象语法树的type都有一个对应的方法来调用,{node}表示过滤出的对应的节点
+		// 比如ImportDeclaration()中的node过滤出来的都是type:ImportDeclaration的节点
 		ImportDeclaration({ node }) {
 			const dirname = path.dirname(filename);
 			const newFile = './' + path.join(dirname, node.source.value);
 			dependencies[node.source.value] = newFile;
 		}
 	});
+	// 将抽象语法树转换成浏览器可以运行的代码,参数:(ast代码,code,用啥转换)
 	const { code } = babel.transformFromAst(ast, null, {
 		presets: ["@babel/preset-env"]
 	});
