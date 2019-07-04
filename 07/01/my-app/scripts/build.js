@@ -1,25 +1,20 @@
-// lesson:7-1 直接create-react-app 是看不到这些配置文件的,需要执行npm run eject,才能把隐藏在node_modules中的webpack配置弹射出来
 'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
-// lesson:7-1 设置环境变量为生产模式
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-// 如果有异常:抛出
 process.on('unhandledRejection', err => {
   throw err;
 });
 
 // Ensure environment variables are read.
-// 提前引入全局变量
 require('../config/env');
 
 const path = require('path');
-// 美化控制台提示
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
@@ -53,7 +48,6 @@ const argv = process.argv.slice(2);
 const writeStatsJson = argv.indexOf('--stats') !== -1;
 
 // Generate configuration
-// 加载webpack核心内容
 const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
