@@ -51,7 +51,7 @@
     "@babel/runtime-corejs2": "^7.4.5",
     "file-loader": "^4.0.0",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "webpack-merge": "^4.2.1"
   }
 }
