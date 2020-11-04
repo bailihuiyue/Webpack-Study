@@ -1,5 +1,5 @@
 {
-  //preset-env 是语法转换:es6转es5
+  //preset-env 是语法转换:es6转es5 比如let,const,async,await的转换,他不转换es6方法,比如array.includes()或者promise等等,所以需要polyfill转方法(api):https://zhuanlan.zhihu.com/p/147083132
   //import "@babel/polyfill"; 可以转换方法,比如旧的浏览器不支持数组map方法(@babel/polyfill可能会污染全局变量)
   // 给"@babel/preset-env"添加参数,把它变成一个数组,数组第一个是要使用的preset的名字
   // 第二个参数是配置参数
@@ -23,6 +23,9 @@
   // ]
   // lesson:3-12 
   // 写类库相关代码通常使用该方法,避免@babel/polyfill污染全局环境,闭包方式
+  // babel 在转译的过程中，对 syntax 的处理可能会使用到 helper 函数，对 api 的处理会引入 polyfill。
+  // 默认情况下，babel 在每个需要使用 helper 的地方都会定义一个 helper，导致最终的产物里有大量重复的 helper；引入 polyfill 时会直接修改全局变量及其原型，造成原型污染。
+  // @babel/plugin-transform-runtime 的作用是将 helper 和 polyfill 都改为从一个统一的地方引入，并且引入的对象和全局变量是完全隔离的，这样解决了上面的两个问题。
   "plugins": [
     // lesson:4-5
     "@babel/plugin-syntax-dynamic-import"

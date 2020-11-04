@@ -3,48 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-/*.babelrc*/
-// {
-    //preset-env 是语法转换:es6转es5
-    //import "@babel/polyfill"; 可以转换方法,比如旧的浏览器不支持数组map方法(@babel/polyfill可能会污染全局变量)
-    // 给"@babel/preset-env"添加参数,把它变成一个数组,数组第一个是要使用的preset的名字
-    // 第二个参数是配置参数
-    // 写业务相关代码通常使用该方法
-    // presets: [
-    //     [
-    //         '@babel/preset-env',
-    //         {
-    //             // 不是把所有代码都转换成低版本浏览器支持的,
-    //             // 这样build完的文件会非常大
-    //             // usage表示只转换项目中使用到的
-    //             useBuiltIns: 'usage',
-    //             targets: {
-    //                 // lesson:3-12 
-    //                 // 项目运行时使用的浏览器环境
-    //                 // babel会根据设置的环境判断是否需要转换
-    //                 chrome: "67",
-    //             },
-    //         }
-    //     ]
-    // ]
-
-    // lesson:3-12 
-    // 写类库相关代码通常使用该方法,避免@babel/polyfill污染全局环境,闭包方式
-//     plugins: [
-//         [
-//           "@babel/plugin-transform-runtime",
-//           {
-//             "absoluteRuntime": false,
-//              //corejs为2时需要 npm install --save @babel/runtime-corejs2 ,通常都设置为2          
-//             "corejs": 2,
-//             "helpers": true,
-//             "regenerator": true,
-//             "useESModules": false
-//           }
-//         ]
-//       ]
-// }
-
 module.exports = {
     mode: 'development',
     // lesson:3-7
@@ -94,6 +52,7 @@ module.exports = {
         //即使热更新失败,浏览器也不刷新当前页面
         hotOnly: true
     },
+    // loader是文件加载器，能够加载资源文件，并对这些文件进行统一处理，诸如编译、压缩等，最终一起打包到指定的文件中。
     module: {
         rules: [{
             // lesson:3-2
@@ -161,6 +120,7 @@ module.exports = {
     // HtmlWebpackPlugin 在打包结束后自动生成一个html文件,并自动引入生成的js文件到html
     // template表示拷贝这个模板文件
     // plugins有点类似于生命周期函数(或者说plugins里面有声明周期),HtmlWebpackPlugin的生命周期是打包结束的时候
+    // plugin的功能更加强大，loader不能做的，plugin都能做。plugin的功能要更加丰富，从打包 优化和压缩，到从新定义环境变量。功能强大到可以用来处理各种各样的任务。
     plugins: [new HtmlWebpackPlugin({
         template: 'src/index.html'
         //CleanWebpackPlugin 打包之前先清空dist目录
@@ -176,6 +136,7 @@ module.exports = {
     // 而不会真正的把没用的方法删除掉,因为代码删除之后,与编译前代码不一致,就没有办法做sourceMap了,行数会对不上,
     // production不需要配置,自动开启,自动生效只需要在package.json中加入sideEffects
     optimization: {
+        mode: 'production',
 		usedExports: true
 	},
     output: {
